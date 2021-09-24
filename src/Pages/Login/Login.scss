@@ -1,0 +1,200 @@
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin out-box {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+}
+
+@mixin ling-font {
+  color: #385185;
+  text-align: center;
+  text-decoration: none;
+}
+
+@mixin link-text {
+  text-decoration: none;
+  text-align: center;
+}
+
+@mixin blue-text {
+  color: #385185;
+  @include link-text;
+}
+
+.KyungHyunLogin {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  align-items: center;
+  width: 372px;
+  height: 561px;
+
+  header {
+    @include out-box;
+    @include flex-column;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    h1 {
+      display: block;
+      width: auto;
+      margin: 22px 12px;
+      height: 51px;
+      font-family: 'Style Script', cursive;
+      text-align: center;
+      color: #000;
+      font-size: 50px;
+      font-weight: 800;
+    }
+    .main-function {
+      @include flex-column;
+      @include flex-center;
+      align-items: center;
+      width: 360px;
+      height: 263px;
+      margin-bottom: 10px;
+      .login-form {
+        @include flex-column;
+        width: 100%;
+        .id,
+        .pw {
+          margin: 0 50px 6px;
+          padding: 9px 0 7px 8px;
+          font-size: 16px;
+          background: #fafafa;
+          border: 1px solid #dbdbdb;
+          outline: none;
+          border-radius: 3px;
+          line-height: 18px;
+        }
+        input {
+          &::placeholder {
+            font-size: 12px;
+          }
+        }
+        .login {
+          margin: 6px 50px;
+          padding: 5px 9px;
+          border: 1px solid;
+          border-radius: 4px;
+          color: #fff;
+          background-color: rgba(0, 149, 246, 0.5);
+          text-align: center;
+          cursor: default;
+        }
+        .else {
+          display: flex;
+          justify-content: space-between;
+          margin: 10px 40px 18px;
+          .line {
+            position: relative;
+            flex-grow: 1;
+            flex-shrink: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+            top: 0.45em;
+          }
+          .text-else {
+            color: #8e8e8e;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 15px;
+            margin: 0 18px;
+          }
+        }
+        .login-box {
+          @include flex-column;
+          @include flex-center;
+          margin: 8px 40px;
+          .fb-login {
+            @include link-text;
+            background-color: #fff;
+            .fb-login-icon {
+              background-image: url(https://wonkooklee.github.io/westabucks/resources/img/logo.jpg);
+              background-size: cover;
+              position: relative;
+              display: inline-block;
+              margin-right: 8px;
+              top: 3px;
+              height: 16px;
+              width: 16px;
+            }
+            .fb-login-text {
+              @include link-text;
+            }
+          }
+        }
+      }
+      .forgot-pw {
+        @include link-text;
+        color: #00376b;
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 12px;
+      }
+    }
+  }
+
+  .sign-in {
+    @include flex-column;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    @include out-box;
+    .ask-have-account {
+      color: #262626;
+      font-size: 14px;
+      margin: 15px;
+      @include link-text;
+      .underline {
+        @include link-text;
+        font-weight: 600;
+        @include link-text;
+        color: #0095f6;
+      }
+    }
+  }
+
+  .download-app {
+    margin-top: 20px;
+    width: 100%;
+    @include flex-column;
+    align-items: center;
+    .download-app-text {
+      padding: 20px 0;
+      font-size: 16px;
+    }
+    .download-link-box {
+      @include flex-center;
+      margin: 10px 0;
+      .apple-download-link {
+        margin-right: 8px;
+      }
+    }
+    .download-img {
+      height: 50px;
+      cursor: pointer;
+    }
+  }
+
+  .valid {
+    margin: 6px 50px;
+    padding: 5px 9px;
+    border: 1px solid;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #0095f6;
+    text-align: center;
+    cursor: pointer;
+  }
+}
