@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Main.scss';
-import CommentForm from './comment/CommentForm';
-import CommentList from './comment/CommentList';
+import CommentForm from './Components/comment/CommentForm';
+import CommentList from './Components/comment/CommentList';
 // import "../../style/common.scss";
 class Main extends Component {
   id = 2;

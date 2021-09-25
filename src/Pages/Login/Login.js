@@ -1,55 +1,72 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './Login.scss';
 import '../../styles/common.scss';
+import {useHistory} from 'react-router-dom'
 // import LoginForm from './LoginForm';
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      idValue: '',
-      pwValue: '',
-      isValid: false,
-    };
-  }
+function Login() {
+  const [ inputs, setInputs ] = useState({
+      id: '',
+      pw: '',
+  })   
 
-  handleIdInput = e => {
-    this.setState({
-      idValue: e.target.value,
-    });
-  };
+  const [ buttons, setButtons] = useState(
+false
+  )
 
-  handlePwInput = e => {
-    this.setState({
-      pwValue: e.target.value,
-    });
-  };
+const history = useHistory();
 
-  checkValid = e => {
-    const { idValue, pwValue } = this.state;
-    const validId = idValue.includes('@');
-    const validPw = pwValue.length >= 6;
-    validId && validPw
-      ? this.setState({ isValid: true })
-      : this.setState({ isValid: false });
-  };
+const { id, pw } = inputs;
 
-  loginValidation = () => {
+
+
+const onChange = e => {
+  const { name, value } = e.target;
+  setInputs({
+    ...inputs,
+    [name]: value
+  })
+}
+
+useEffect(() => {
+  setButtons(
+    id.includes('@') && pw.length >= 6 ? true : false
+  );
+}, [inputs])
+
+const onSubmit = e => {
+  e.preventDefault();
+  if(buttons){
+    history.push('/main')}}
+
+  // const checkValid = e => {
+  //   // const { id, pw } = this.state;
+  //   const validId = id.includes('@');
+  //   const validPw = pw.length >= 6;
+  //   validId && validPw
+  //     ? setInputs({ isValid: true })
+  //     : setInputs({ isValid: false });
+  // };
+
+  // const onLogin = () => {
+
+  // }
+
+
+  const loginValidation = () => {
     this.state.isValid
       ? this.props.history.push('/main')
-      : (this.state.idValue = ''); // 여기서부턴 유효성 검사 추후 추가 예정
-    this.state.pwValue = '';
+      : (this.state.id= ''); // 여기서부턴 유효성 검사 추후 추가 예정
+    this.state.pw = '';
     this.state.alert =
       '입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.';
   };
-  enterValidation = e => {
+  const enterValidation = e => {
     if (e.key === 'Enter' && this.state.isValid) {
-      this.props.history.push('/Main-KyungHyun');
+      this.props.history.push('/main');
     }
   };
 
-  render() {
-    const { idValue, pwValue } = this.state;
+  
     return (
       <div className="KyungHyunLogin">
         <header>
@@ -57,32 +74,32 @@ class Login extends React.Component {
             <b>instagram</b>
           </h1>
           <div className="main-function">
-            <form className="login-form" method="POST">
+            <form className="login-form" method="POST" onSubmit={onSubmit}>
               <input
                 className="id"
                 placeholder="전화번호, 사용자 이름 또는 이메일"
                 type="text"
-                onChange={this.handleIdInput}
-                onKeyUp={this.checkValid}
-                onKeyDown={this.enterValidation}
-                value={idValue}
-                name="idValue"
+                onChange={onChange}
+                // onKeyUp={checkValid}
+                // onKeyDown={enterValidation}
+                value={id}
+                name="id"
               />
 
               <input
                 className="pw"
                 placeholder="비밀번호"
                 type="password"
-                onChange={this.handlePwInput}
-                onKeyUp={this.checkValid}
-                onKeyDown={this.enterValidation}
-                value={pwValue}
-                name="pwValue"
+                onChange={onChange}
+                // onKeyUp={checkValid}
+                // onKeyDown={enterValidation}
+                value={pw}
+                name="pw"
               />
               <button
-                className={this.state.isValid ? 'valid' : 'login'}
-                type="button"
-                onClick={this.loginValidation}
+                className={buttons ? 'valid' : 'login'}
+                type="submit"
+                // onClick={loginValidation}
               >
                 <div>로그인</div>
               </button>
@@ -98,7 +115,6 @@ class Login extends React.Component {
                 </a>
               </div>
             </form>
-            <p>{this.state.alert}</p>
             <a className="forgot-pw" href="https://bit.ly/3k5tzjV" tabIndex={0}>
               비밀번호를 잊으셨나요?
             </a>
@@ -134,6 +150,6 @@ class Login extends React.Component {
       </div>
     );
   }
-}
 
-export default Login;
+
+  export default Login
