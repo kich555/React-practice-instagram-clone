@@ -1,61 +1,108 @@
-import React, { Component } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './Main.scss';
-import CommentForm from './Components/comment/CommentForm';
+import CreateComment from './Components/comment/CreateComment';
 import CommentList from './Components/comment/CommentList';
 // import "../../style/common.scss";
-class Main extends Component {
-  id = 2;
+function Main() {
 
-  state = {
-    information: [
-      {
-        id: 0,
-        comment: 'Beautiful weather',
-      },
-      {
-        id: 1,
-        comment: 'What a nice pic!! Who took the picture???',
-      },
-    ],
-  };
+useEffect(() => {
+  fetch('http://localhost:3001/data/ComponentData.json')
+  .then(res => res.json())
+  .then(res => {
+    setComments(
+      res.CL,
+    )
+  })
+})
 
-  handleCreate = data => {
-    const { information } = this.state;
-    this.setState({
-      information: information.concat(
-        Object.assign({}, data, {
-          id: this.id++,
-        })
-      ),
+  const [inputs, setInputs] = useState({
+    comment: '',
+  });
+
+  const {comment} = inputs;
+
+  const onChange = e => {
+    setInputs({
+      comment: e.target.value,
     });
   };
 
-  handleRemove = id => {
-    const { information } = this.state;
-    this.setState({
-      information: information.filter(info => info.id !== id),
-      // info.id가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-      // 선택한 'id'를 제외한 나머지 id들로 새로운 배열을 만들어서 표시함
-      // info.id 가 id 인 것을 제거함
-    });
-  };
+//Error: Objects are not valid as a React child (found: object with keys {id, comment}). If you meant to render a collection of children, use an array instead. <-- comments = [comment{ id, comment}] <--원하던 것은 댓글값인 comment 였지만 comment객체와 파라미터값의 이름이 똑같아 오류가 발생 comment객체 이름을 commentInfo로 변경
 
-  handleUpdate = (id, data) => {
-    const { information } = this.state;
-    this.setState({
-      information: information.map(info => {
-        if (info.id === id) {
-          return {
-            id,
-            ...data,
-          };
-        }
-        return info;
-      }),
-    });
-  };
+  const [comments, setComments] = useState([
+    // {
+    //   id: 1,
+    //   comment: 'Beautiful weather',
+    // },
+    // {
+    //   id: 2,
+    //   comment: 'What a nice pic!! Who took the picture???',
+    // },
+  ]);
 
-  render() {
+  const nextId = useRef(3);
+
+  const onCreate = (e) => {
+    const commentInfo = {
+      comment,
+      id: nextId.current,
+
+    }
+    setComments([...comments, commentInfo]);
+// comments의 불변성을 지키며 새 항목을 추가
+    setInputs({
+      comment:'',
+    });
+    nextId.current += 1; //useRef() 를 사용 할 때 파라미터를 넣으면 이 값이 .current 값의 기본값이 됨
+  }
+
+  const onSubmit = e => {
+    e.preventDefault();
+    onCreate();
+  }
+
+  const onRemove = id => {
+    setComments(comments.filter(commentInfo => commentInfo.id !== id));
+  }
+  
+
+  // handleCreate = data => {
+  //   const { information } = this.state;
+  //   this.setState({
+  //     information: information.concat(
+  //       Object.assign({}, data, {
+  //         id: this.id++,
+  //       })
+  //     ),
+  //   });
+  // };
+
+  // handleRemove = id => {
+  //   const { information } = this.state;
+  //   this.setState({
+  //     information: information.filter(info => info.id !== id),
+  //     // info.id가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+  //     // 선택한 'id'를 제외한 나머지 id들로 새로운 배열을 만들어서 표시함
+  //     // info.id 가 id 인 것을 제거함
+  //   });
+  // };
+
+  // handleUpdate = (id, data) => {
+  //   const { information } = this.state;
+  //   this.setState({
+  //     information: information.map(info => {
+  //       if (info.id === id) {
+  //         return {
+  //           id,
+  //           ...data,
+  //         };
+  //       }
+  //       return info;
+  //     }),
+  //   });
+  // };
+
+
     return (
       <div className="KyungHyunMain">
         <header className="main-header">
@@ -262,18 +309,14 @@ class Main extends Component {
                       <a className="view-more">더 보기</a>
                     </div>
                     <div className="article-text3">
-                      <CommentList
-                        data={this.state.information}
-                        onRemove={this.handleRemove}
-                        onUpdate={this.handleUpdate}
-                      />
+                      <CommentList comments={comments} onRemove={onRemove} />
                     </div>
                     <div className="posted-time">
                       <span className="time">12시간 전</span>
                     </div>
                     <section className="comment">
                       <div className="comment-box">
-                        <CommentForm onCreate={this.handleCreate} />
+                        <CreateComment comment={comment} onChange={onChange} onCreate={onCreate} onSubmit={onSubmit} />
                       </div>
                     </section>
                   </div>
@@ -567,6 +610,5 @@ class Main extends Component {
       </div>
     );
   }
-}
 
 export default Main;

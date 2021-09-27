@@ -1,31 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class CommentForm extends Component {
-  state = {
-    comment: '',
-  };
 
-  handleChange = e => {
-    this.setState({
-      comment: e.target.value,
-    });
-  };
+function CreateComment ({comment, onChange, onSubmit}) {
+ console.log('a')
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.onCreate(this.state);
-    this.setState({
-      comment: '',
-    });
-  };
-
-  handleEnter = e => {};
-
-  render() {
-    const { comment } = this.state;
     return (
       <>
-        <form onSubmit={this.handleSubmit} className="comment-box-form">
+        <form onSubmit={onSubmit} className="comment-box-form">
           <div className="comment-box-form-box">
             <div className="article-header-profile">
               <a
@@ -42,7 +23,7 @@ class CommentForm extends Component {
             <input
               id="textarea"
               placeholder="댓글 달기..."
-              onChange={this.handleChange}
+              onChange={onChange}
               value={comment}
             />
           </div>
@@ -53,6 +34,6 @@ class CommentForm extends Component {
       </>
     );
   }
-}
 
-export default CommentForm;
+
+export default CreateComment;
