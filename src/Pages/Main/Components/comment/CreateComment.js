@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function CreateComment ({comment, onChange, onSubmit}) {
- console.log('a')
+//  console.log('a')
 
     return (
       <>

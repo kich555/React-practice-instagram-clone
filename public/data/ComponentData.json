@@ -12,63 +12,6 @@
       "id": 2,
       "comment": "test"
     }
-  ],
-
-  "footers": [
-    {
-      "id": 0,
-      "foot": "소개·",
-      "href": "https://about.instagram.com/"
-    },
-    {
-      "id": 1,
-      "foot": "도움말·",
-      "href": "https://help.instagram.com/"
-    },
-    {
-      "id": 2,
-      "foot": "홍보 센터·",
-      "href": "https://about.instagram.com/blog"
-    },
-    {
-      "id": 3,
-      "foot": "API·",
-      "href": "https://developers.facebook.com/docs/instagram"
-    },
-    {
-      "id": 4,
-      "foot": "채용 정보·",
-      "href": "https://about.instagram.com/about-us/careers"
-    },
-    {
-      "id": 5,
-      "foot": "개인정보처리방침·",
-      "href": "https://help.instagram.com/519522125107875"
-    },
-    {
-      "id": 6,
-      "foot": "약관·",
-      "href": "https://help.instagram.com/581066165581870"
-    },
-    {
-      "id": 7,
-      "foot": "위치·",
-      "href": "https://www.instagram.com/explore/locations/"
-    },
-    {
-      "id": 8,
-      "foot": "인기 계정·",
-      "href": "https://www.instagram.com/directory/profiles/"
-    },
-    {
-      "id": 9,
-      "foot": "해시태그·",
-      "href": "https://www.instagram.com/directory/hashtags/"
-    },
-    {
-      "id": 10,
-      "foot": "언어",
-      "href": ""
-    }
   ]
+
 }

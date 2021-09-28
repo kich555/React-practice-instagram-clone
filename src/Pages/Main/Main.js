@@ -2,18 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import './Main.scss';
 import CreateComment from './Components/comment/CreateComment';
 import CommentList from './Components/comment/CommentList';
+import FootList from './Components/Footer/FootList';
 // import "../../style/common.scss";
 function Main() {
 
-useEffect(() => {
-  fetch('http://localhost:3001/data/ComponentData.json')
-  .then(res => res.json())
-  .then(res => {
-    setComments(
-      res.CL,
-    )
-  })
-})
+
 
   const [inputs, setInputs] = useState({
     comment: '',
@@ -39,6 +32,28 @@ useEffect(() => {
     //   comment: 'What a nice pic!! Who took the picture???',
     // },
   ]);
+
+  useEffect(() => {
+  fetch('http://localhost:3001/data/ComponentData.json')
+  .then(res => res.json())
+  .then(res => {
+    setComments(
+      res.CL,
+    )
+  })
+},[])
+
+const [footers, setFooters] = useState([]);
+
+useEffect(() => {
+  fetch('http://localhost:3001/data/footer.json')
+  .then(res => res.json())
+  .then(res => {
+    setFooters(
+      res.footers,
+    )
+  })
+},[])
 
   const nextId = useRef(3);
 
@@ -499,7 +514,8 @@ useEffect(() => {
               </div>
               <div className="aside-buttom">
                 <ul className="aside-buttom-ul">
-                  <li>
+                  <FootList footers={footers} />
+                  {/* <li>
                     {' '}
                     <a
                       className="aside-bottom-list"
@@ -598,7 +614,7 @@ useEffect(() => {
                     <a className="aside-bottom-list" href>
                       언어
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
                 <span className="aside-buttom-text">
                   © 2021 Instagram from Facebook

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CommentInfo({ commentInfo, onRemove }) {
-  console.log('c')
+  // console.log('c')
   return (
     <div className="article-comment">
       <span>{commentInfo.comment}</span><button onClick={() => onRemove(commentInfo.id)}>X</button>
@@ -27,7 +27,7 @@ function CommentInfo({ commentInfo, onRemove }) {
 
 
 function CommentList ({comments, onRemove}) {
-  console.log('b')
+  // console.log('b')
   return (
     <div>
       {comments.map(commentInfo => (
