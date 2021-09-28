@@ -3,6 +3,7 @@ import './Main.scss';
 import CreateComment from './Components/comment/CreateComment';
 import CommentList from './Components/comment/CommentList';
 import FootList from './Components/Footer/FootList';
+import HeadList from './Components/Header/HeadList';
 // import "../../style/common.scss";
 function Main() {
 
@@ -34,7 +35,7 @@ function Main() {
   ]);
 
   useEffect(() => {
-  fetch('http://localhost:3001/data/ComponentData.json')
+  fetch('http://localhost:3000/data/ComponentData.json')
   .then(res => res.json())
   .then(res => {
     setComments(
@@ -46,11 +47,23 @@ function Main() {
 const [footers, setFooters] = useState([]);
 
 useEffect(() => {
-  fetch('http://localhost:3001/data/footer.json')
+  fetch('http://localhost:3000/data/footerData.json')
   .then(res => res.json())
   .then(res => {
     setFooters(
       res.footers,
+    )
+  })
+},[])
+
+const [headers, setHeaders] = useState([]);
+
+useEffect(() => {
+  fetch('http://localhost:3000/data/headerData.json')
+  .then(res => res.json())
+  .then(res => {
+    setHeaders(
+      res.headers,
     )
   })
 },[])
@@ -165,7 +178,8 @@ useEffect(() => {
             <div className="article-box">
               <div className="story-box">
                 <div className="story-space">
-                  <div className="story-list-box">
+                  <HeadList headers={headers}/>
+                  {/* <div className="story-list-box">
                     <a className="story-a" href>
                       <img
                         className="story-img"
@@ -248,7 +262,7 @@ useEffect(() => {
                     <a className="small-basic2" href>
                       nyangnya29
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="feed-box">
