@@ -9,9 +9,9 @@ function Login() {
       pw: '',
   })   
 
-  const [ buttons, setButtons] = useState(
-false
-  )
+//   const [ buttons, setButtons] = useState(
+// false
+//   )
 
 const history = useHistory();
 
@@ -27,15 +27,15 @@ const onChange = e => {
   })
 }
 
-useEffect(() => {
-  setButtons(
-    id.includes('@') && pw.length >= 6 ? true : false
-  );
-}, [inputs])
+// useEffect(() => {
+//   setButtons(
+//     id.includes('@') && pw.length >= 6 ? true : false
+//   );
+// }, [inputs])
 
 const onSubmit = e => {
   e.preventDefault();
-  if(buttons){
+  if(id.includes('@') && pw.length >= 6){
     history.push('/main')}}
 
   // const checkValid = e => {
@@ -97,7 +97,7 @@ const onSubmit = e => {
                 name="pw"
               />
               <button
-                className={buttons ? 'valid' : 'login'}
+                className={ id.includes('@') && pw.length >= 6 ? 'valid' : 'login'}
                 type="submit"
                 // onClick={loginValidation}
               >
