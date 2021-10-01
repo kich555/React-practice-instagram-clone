@@ -13,6 +13,8 @@ function Login() {
 // false
 //   )
 
+// 다른 state에 영향을 끼치는 state는 좋지 않지 않을까?
+
 const history = useHistory();
 
 const { id, pw } = inputs;
