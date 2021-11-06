@@ -27,7 +27,6 @@ function CommentInfo({ commentInfo, onRemove }) {
 
 
 function CommentList ({comments, onRemove}) {
-  // console.log('b')
   return (
     <div>
       {comments.map(commentInfo => (
